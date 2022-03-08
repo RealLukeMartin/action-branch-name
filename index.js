@@ -38,12 +38,13 @@ async function run() {
 
         // Check if branch pass regex
         const regex = RegExp(core.getInput('regex'));
-        core.info(`Regex: ${regex}`);
+        core.info(`Regex: ${regex} comparing ${branch}`);
         if (!regex.test(branch)) {
+            core.info(`Regex check failed`);
             core.setFailed(`Branch ${branch} failed to pass match regex - ${regex}`);
             return
         }
-
+        core.info(`Regex check passed`)
         // Check if branch starts with a prefix
         const prefixes = core.getInput('allowed_prefixes');
         core.info(`Allowed Prefixes: ${prefixes}`);
